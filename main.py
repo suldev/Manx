@@ -4,7 +4,7 @@ import urls, out, log
 def main():
     syntax = {'local' : 0, 'server' : 1, 'hosts' : 2, 'domain' : 3}
     parser = argparse.ArgumentParser(
-        prog='Manx',
+        prog='manx',
         description='Combines multiple blocklists into a single dnsmasq configuration file. This program is currently limited to dnsmasq blocklists since 2.86'
     )
     parser.add_argument('path', type=argparse.FileType('r'), metavar='FILE', help='Required. New-line delimited list of urls. Use # for comments')
