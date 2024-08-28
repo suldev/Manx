@@ -9,8 +9,9 @@ def main():
     parser.add_argument('path', type=argparse.FileType('r'), metavar='FILE', help='Required. New-line delimited list of urls. Use # for comments')
     parser.add_argument('-i', '--install', default=False, action='store_true', help='Install the configuration file and restart dnsmasq. Must be run as root.')
     parser.add_argument('-o', '--output', type=argparse.FileType('w'), metavar='FILE', default='blacklist.conf', help='Output file name. Defaults to blocklist.conf')
-    parser.add_argument('-T', default='%Y-%m-%d %H:%M:%S', metavar='FORMAT', help='Set the time stamp formatting using python standard strftime format')
+    parser.add_argument('-T', default='%Y-%m-%d %H:%M:%S', metavar='FORMAT', help='Set the time stamp formatting using python standard strftime format. Default is ISO8601 format. Not used for -x')
     parser.add_argument('-v', '--verbose', default=False, action='store_true', help='Print all steps.')
+    parser.add_argument('-x', '--nohead', default=False, action='store_true', help='Do not printer header information (program name, version, time, etc.).')
 
     wl_arg_grp = parser.add_argument_group('Whitelist', 'Provide a newline-separated list of urls to whitelist')
     wl_group = wl_arg_grp.add_mutually_exclusive_group()
@@ -46,7 +47,7 @@ def main():
 
     #Write out
     log.info("Writing to disk")
-    out.to_file(out_lines, args.output, args.T)
+    out.to_file(out_lines, args.output, not args.nohead, args.T)
     if args.install:
         log.error("Install not yet implemented")
         #out.install()
