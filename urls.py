@@ -21,6 +21,8 @@ def lines_to_urls(lines, simple):
         elif line.startswith(hosts_prefix):
             urls.append(line[len(hosts_prefix):])
         elif urlparse(line).netloc != '':
+            urls.append(urlparse(line).netloc)
+        elif urlparse(line).path != '':
             urls.append(line.rstrip())
     return urls
 
