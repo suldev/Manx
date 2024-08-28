@@ -1,5 +1,8 @@
+verbose = False
+
 def info(message):
-    print (f":: {message}")
+    if verbose:
+        print (f":: {message}")
 
 def warn(message):
     print (f"WW {message}")

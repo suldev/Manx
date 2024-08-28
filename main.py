@@ -3,13 +3,14 @@ import urls, out, log
 
 def main():
     parser = argparse.ArgumentParser(
-        prog='Update Blocklist',
-        description='Combines multiple blocklist files into a single dnsmasq configuration file. This program is limited to dnsmasq blocklists since 2.86'
+        prog='Manx',
+        description='Combines multiple blocklists into a single dnsmasq configuration file. This program is currently limited to dnsmasq blocklists since 2.86'
     )
     parser.add_argument('path', type=argparse.FileType('r'), metavar='FILE', help='Required. New-line delimited list of urls. Use # for comments')
     parser.add_argument('-i', '--install', default=False, action='store_true', help='Install the configuration file and restart dnsmasq. Must be run as root.')
     parser.add_argument('-o', '--output', type=argparse.FileType('w'), metavar='FILE', default='blacklist.conf', help='Output file name. Defaults to blocklist.conf')
     parser.add_argument('-T', default='%Y-%m-%d %H:%M:%S', metavar='FORMAT', help='Set the time stamp formatting using python standard strftime format')
+    parser.add_argument('-v', '--verbose', default=False, action='store_true', help='Print all steps.')
 
     wl_arg_grp = parser.add_argument_group('Whitelist', 'Provide a newline-separated list of urls to whitelist')
     wl_group = wl_arg_grp.add_mutually_exclusive_group()
@@ -18,6 +19,7 @@ def main():
 
     #Parse those args
     args = parser.parse_args()
+    log.verbose = args.verbose
     
     #Read blocklist urls
     log.info("Processing lists")
