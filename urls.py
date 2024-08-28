@@ -50,6 +50,8 @@ def to_lines(blacklist, whitelist, omit, method):
             line += dnsmasq_2_85_prefix + url + dnsmasq_postfix
         elif method == 2:
             line += hosts_prefix + url
+        elif method == 3:
+            line += url
         if len(line) > 1:
             lines.append(line)
     return lines
