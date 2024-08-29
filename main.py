@@ -2,7 +2,7 @@ import argparse
 import urls, out, log
 
 def main():
-    syntax = {'local' : 0, 'server' : 1, 'hosts' : 2, 'domain' : 3}
+    syntax = {'local' : 0, 'server' : 1, 'hosts' : 2, 'domain' : 3, 'adblock' : 4}
     parser = argparse.ArgumentParser(
         prog='manx',
         description='Combines multiple blocklists into a single dnsmasq configuration file. This program is currently limited to dnsmasq blocklists since 2.86'
@@ -13,7 +13,7 @@ def main():
     parser.add_argument('-T', default='%Y-%m-%d %H:%M:%S', metavar='FORMAT', help='Set the time stamp formatting using python standard strftime format. Default is ISO8601 format. Not used for -x')
     parser.add_argument('-v', '--verbose', default=False, action='store_true', help='Print all steps.')
     parser.add_argument('-x', '--nohead', default=False, action='store_true', help='Do not printer header information (program name, version, time, etc.).')
-    parser.add_argument('-s', '--syntax', default='local', metavar='KEY', help='Set the output syntax. Options are local, server, hosts and domain.')
+    parser.add_argument('-s', '--syntax', default='local', metavar='KEY', help='Set the output syntax. Options are local, server, hosts, adblock, and domain.')
 
     wl_arg_grp = parser.add_argument_group('Whitelist', 'Provide a newline-separated list of urls to whitelist')
     wl_group = wl_arg_grp.add_mutually_exclusive_group()

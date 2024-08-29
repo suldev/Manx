@@ -6,6 +6,8 @@ dnsmasq_2_86_prefix = 'local=/'
 dnsmasq_2_85_prefix = 'server=/'
 dnsmasq_postfix = '/'
 hosts_prefix = '0.0.0.0 '
+adblock_prefix = '||'
+adblock_postfix = '^'
 
 def lines_to_urls(lines, simple):
     urls = []
@@ -20,6 +22,8 @@ def lines_to_urls(lines, simple):
             urls.append(line[len(dnsmasq_2_85_prefix):-len(dnsmasq_postfix)])
         elif line.startswith(hosts_prefix):
             urls.append(line[len(hosts_prefix):])
+        elif line.startswith(adblock_prefix):
+            urls.append(line[len(adblock_prefix):-len(adblock_postfix)])
         elif urlparse(line).netloc != '':
             urls.append(urlparse(line).netloc)
         elif urlparse(line).path != '':
@@ -54,6 +58,8 @@ def to_lines(blacklist, whitelist, omit, method):
             line += hosts_prefix + url
         elif method == 3:
             line += url
+        elif method == 4:
+            line += adblock_prefix + url + adblock_postfix
         if len(line) > 1:
             lines.append(line)
     return lines
