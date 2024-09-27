@@ -1,0 +1,10 @@
+[Unit]
+Description="Run manx every three days"
+
+[Timer]
+OnActiveSec=5min
+OnUnitActiveSec=72h
+Unit=manx.Service
+
+[Install]
+WantedBy=multi-user.target

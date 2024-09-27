@@ -1,0 +1,5 @@
+[Unit]
+Description="DNS blocklist merger, parser, inspector"
+
+[Service]
+ExecStart=/usr/bin/manx-daemon
