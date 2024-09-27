@@ -1,0 +1,2 @@
+#Add your line-delimited urls to be whitelisted
+#patch.com

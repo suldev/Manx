@@ -1,0 +1,2 @@
+#Place your line-delimited blocklists here
+#https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt
