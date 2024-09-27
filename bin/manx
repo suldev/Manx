@@ -1,0 +1,8 @@
+#!/bin/bash
+
+STATUS_MANX_FAIL=4
+
+BINPATH=/usr/lib/manx/main.py
+/bin/python3 $BINPATH "$@"
+[ $? -ne 0 ] && exit $STATUS_MANX_FAIL
+exit 0

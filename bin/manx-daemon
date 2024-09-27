@@ -1,0 +1,31 @@
+#!/bin/bash
+
+STATUS_OK=0
+STATUS_NOT_ROOT=1
+STATUS_MASQ_CONF_TEST_FAIL=2
+STATUS_MASQ_RESTART_FAIL=3
+STATUS_MANX_FAIL=4
+
+if [[ $EUID > 0 ]]; then
+    echo Must be root
+    exit $STATUS_NOT_ROOT
+fi
+
+BINPATH=/usr/lib/manx/main.py
+WTEPATH=/etc/manx/whitelist.txt
+BLKPATH=/etc/manx/blocklist.txt
+OUTPATH=/var/tmp/blacklist.conf
+DNSPATH=/etc/dnsmasq.d/blacklist.conf
+DNSPATHOLD=/etc/dnsmasq.d/blacklist.conf.old
+
+/bin/python $BINPATH -v -o $OUTPATH -w $WTEPATH $BLKPATH
+[ $? -ne 0 ] && exit $STATUS_MANX_FAIL
+
+dnsmasq -C $OUTPATH --test
+[ $? -ne 0 ] && exit $STATUS_MASQ_CONF_TEST_FAIL
+
+mv $DNSPATH $DNSPATHOLD
+mv $OUTPATH $DNSPATH
+systemctl restart dnsmasq
+
+exit $STATUS_OK
