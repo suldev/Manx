@@ -12,7 +12,7 @@ adblock_postfix = '^'
 def lines_to_urls(lines, simple):
     urls = []
     for line in lines:
-        if line.startswith('#'): 
+        if line.startswith('#') or line.startswith('!'): 
             continue
         elif simple:
             urls.append(line.rstrip())
