@@ -1,5 +1,14 @@
 # Manx
 Download, parse, and filter multiple blocklists and inject them directly into your dnsmasq or hosts configurations.
+## Docker
+Build the docker image using the following command in project root directory:
+
+`$ docker build . --tag manx:dev`
+
+Application can be run by using the following command, where /path/to/config points to a directory containing both a blocklist.txt and whitelist.txt file to be consumed. The whitelist can be empty. A combined output file named blacklist.conf will be produced in the same directory if the process completes successfully:
+
+`$ docker run --rm --name manx -v /path/to/config:/manx manx:dev`
+
 ## Usage
 There are several ways to configure this application to produce the requested output.
 
