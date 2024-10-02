@@ -14,12 +14,14 @@ SYSTEMD=/etc/systemd/
 
 mkdir $MANXLIB $MANXCFG
 cp src/* $MANXLIB
+chmod 755 bin/manx
+chmod 744 bin/manx-daemon
 cp bin/* $MANXBIN
-cp blacklist.txt $MANXCFG
+cp blocklist.txt $MANXCFG
 cp whitelist.txt $MANXCFG
-cp systemd/* $SYSTEMD
+cp -r systemd/* $SYSTEMD
 
-systemctl --reload-daemon
+systemctl daemon-reload
 systemctl enable manx.timer
 systemctl start manx.timer
 
