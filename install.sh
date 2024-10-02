@@ -1,5 +1,5 @@
 #!/bin/bash
-
+STATUS_OK=0
 STATUS_NOT_ROOT=1
 
 if [[ $EUID > 0 ]]; then
@@ -25,4 +25,4 @@ systemctl daemon-reload
 systemctl enable manx.timer
 systemctl start manx.timer
 
-exit 0
+exit $STATUS_OK
